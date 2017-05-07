@@ -8,10 +8,13 @@ var bot = new Twit({
   timeout_ms: 60*1000
 });
 
-bot.post('statuses/update', {status: 'ok just gonna have robuts tweet for me from now on'}, function (err, data, response){
+bot.get('followers/list', { screen_name: 'catrainbow' }, function(err, data, response){
   if(err){
     console.log(err);
   } else {
-    console.log(data.text + ' was tweeted.');
+    data.users.forEach(function(user){
+      console.log(user.screen_name);
+    });
+    console.log(data);
   }
-})
+});
